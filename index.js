@@ -1,12 +1,11 @@
-import { Keypair } from "@solana/web3.js"
+const scripts = ['04_get_rpc_and_getbalance'];
 
-// 创建新钱包
-const keypair = Keypair.generate()
-
-console.log(keypair)
-
-// 转换为Base58编码
-console.log(`The public key is: `, keypair.publicKey.toBase58())
-
-// 处理私钥的打印格式
-console.log(`The secret key is:[${keypair.secretKey.toString()}]`)
+scripts.forEach(async (script) => {
+  console.log(`正在测试 ${script}.js`);
+  try {
+    await import(`./${script}.js`);
+  } catch (error) {
+    console.error(`无法导入脚本文件 ${script}.js: ${error.message}`);
+  }
+  console.log(`完成测试 ${script}.js\n`);
+});
